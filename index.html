@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>About — Expense Tracker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fafaf7;
+    --surface: #ffffff;
+    --ink: #1a1a1a;
+    --ink-muted: #4a4a4a;
+    --ink-soft: #6b6b6b;
+    --accent: #2e8b7b;
+    --accent-soft: #e8f3f0;
+    --border: #e5e5e0;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #141413;
+      --surface: #1c1c1a;
+      --ink: #f0f0ed;
+      --ink-muted: #c4c4bf;
+      --ink-soft: #8a8a85;
+      --accent: #4fb3a0;
+      --accent-soft: #1e2e2a;
+      --border: #2a2a27;
+    }
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 15px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    padding: 24px 20px 40px;
+    overscroll-behavior: none;
+  }
+
+  .container {
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  /* Hero: app icon + name + version */
+  .hero {
+    text-align: center;
+    padding: 8px 0 28px;
+  }
+
+  .app-icon {
+    width: 72px;
+    height: 72px;
+    margin: 0 auto 16px;
+    background: var(--accent-soft);
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent);
+    box-shadow: 0 4px 12px rgba(46, 139, 123, 0.08);
+  }
+
+  .app-icon svg {
+    width: 40px;
+    height: 40px;
+  }
+
+  .app-name {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 26px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+
+  .version {
+    font-size: 13px;
+    color: var(--ink-soft);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Sections */
+  .section {
+    margin-top: 32px;
+  }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 10px;
+    padding-left: 4px;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px 20px;
+  }
+
+  .card + .card {
+    margin-top: 10px;
+  }
+
+  .card p {
+    color: var(--ink-muted);
+    font-size: 14.5px;
+  }
+
+  .card p + p {
+    margin-top: 10px;
+  }
+
+  .card h3 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+
+  /* Highlighted intro card */
+  .intro-card {
+    background: var(--accent-soft);
+    border: none;
+  }
+
+  .intro-card p {
+    color: var(--ink-muted);
+  }
+
+  /* Row items (for links, contact, etc.) */
+  .row-group {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+
+  .row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 18px;
+    color: var(--ink);
+    text-decoration: none;
+    transition: background 0.15s ease;
+  }
+
+  .row + .row {
+    border-top: 1px solid var(--border);
+  }
+
+  .row:active {
+    background: var(--accent-soft);
+  }
+
+  .row-icon {
+    width: 34px;
+    height: 34px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .row-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .row-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .row-title {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 2px;
+  }
+
+  .row-subtitle {
+    font-size: 13px;
+    color: var(--ink-soft);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .row-chevron {
+    color: var(--ink-soft);
+    flex-shrink: 0;
+  }
+
+  .row-chevron svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  /* Values list (vision) */
+  .values {
+    display: grid;
+    gap: 10px;
+    margin-top: 14px;
+  }
+
+  .value-item {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .value-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 8px;
+  }
+
+  .value-item strong {
+    color: var(--ink);
+    font-weight: 600;
+    font-size: 14.5px;
+  }
+
+  .value-item span {
+    color: var(--ink-muted);
+    font-size: 14px;
+  }
+
+  /* Signature / credit block */
+  .signature {
+    text-align: center;
+    margin-top: 36px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    color: var(--ink-soft);
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  .signature .heart {
+    color: var(--accent);
+    display: inline-block;
+    transform: translateY(1px);
+  }
+
+  .signature .maker {
+    color: var(--ink-muted);
+    font-weight: 500;
+    margin-top: 4px;
+  }
+
+  /* Tiny legal footer */
+  .legal {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+    font-size: 13px;
+  }
+
+  .legal a {
+    color: var(--ink-soft);
+    text-decoration: none;
+  }
+
+  .legal a:active {
+    color: var(--accent);
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="app-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="6" width="18" height="13" rx="2"/>
+        <path d="M3 10h18"/>
+        <circle cx="16" cy="14.5" r="1.5" fill="currentColor"/>
+      </svg>
+    </div>
+    <h1 class="app-name">Expense Tracker</h1>
+    <div class="version">Version 1.0.0</div>
+  </header>
+
+  <!-- Intro -->
+  <section class="section">
+    <div class="card intro-card">
+      <p>A simple, private way to track where your money goes. Designed to stay out of your way — no accounts, no ads, no distractions. Just you and your expenses.</p>
+    </div>
+  </section>
+
+  <!-- Vision / Mission -->
+  <section class="section">
+    <div class="section-label">Our Vision</div>
+    <div class="card">
+      <p>We believe managing your money should be quiet, fast, and deeply personal. Most finance apps want your data, your attention, and your email. We don't.</p>
+      <p>Expense Tracker is built on a simple idea: the person who knows your spending best should be you — not a company, not an algorithm, not a server somewhere.</p>
+
+      <div class="values">
+        <div class="value-item">
+          <span class="value-dot"></span>
+          <div>
+            <strong>Private by default.</strong>
+            <span> &nbsp;Your financial data stays on your device.</span>
+          </div>
+        </div>
+        <div class="value-item">
+          <span class="value-dot"></span>
+          <div>
+            <strong>Fast to log.</strong>
+            <span> &nbsp;Adding an expense takes seconds, not minutes.</span>
+          </div>
+        </div>
+        <div class="value-item">
+          <span class="value-dot"></span>
+          <div>
+            <strong>Honest &amp; focused.</strong>
+            <span> &nbsp;No ads, no dark patterns, no upsells on every screen.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Feedback -->
+  <section class="section">
+    <div class="section-label">Help Us Improve</div>
+    <div class="card">
+      <p>This app grows based on what real users need. If something is broken, missing, or could be better — we want to hear about it.</p>
+    </div>
+    <div class="row-group" style="margin-top: 10px;">
+      <a class="row" href="mailto:expensetracker38@gmail.com?subject=Feedback%20%E2%80%94%20Expense%20Tracker">
+        <div class="row-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+          </svg>
+        </div>
+        <div class="row-content">
+          <div class="row-title">Send Feedback</div>
+          <div class="row-subtitle">expensetracker38@gmail.com</div>
+        </div>
+        <div class="row-chevron">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"/>
+          </svg>
+        </div>
+      </a>
+      <a class="row" href="https://forms.gle/YOUR_FORM_ID_HERE" target="_blank" rel="noopener">
+        <div class="row-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+          </svg>
+        </div>
+        <div class="row-content">
+          <div class="row-title">Share a Suggestion</div>
+          <div class="row-subtitle">Quick 2-minute form</div>
+        </div>
+        <div class="row-chevron">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"/>
+          </svg>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="section">
+    <div class="section-label">Contact</div>
+    <div class="row-group">
+      <a class="row" href="mailto:expensetracker38@gmail.com">
+        <div class="row-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M12 8v4"/>
+            <path d="M12 16h.01"/>
+          </svg>
+        </div>
+        <div class="row-content">
+          <div class="row-title">Support</div>
+          <div class="row-subtitle">Questions, bugs, anything else</div>
+        </div>
+        <div class="row-chevron">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"/>
+          </svg>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- Signature / Made by -->
+  <div class="signature">
+    Made with <span class="heart">♥</span> in Kathmandu, Nepal
+    <div class="maker">by Bidhan</div>
+  </div>
+
+  <!-- Legal links -->
+  <div class="legal">
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="terms.html">Terms of Service</a>
+  </div>
+
+</div>
+</body>
+</html>
